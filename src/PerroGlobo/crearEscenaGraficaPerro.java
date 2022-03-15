@@ -81,6 +81,8 @@ class crearEscenaGraficaPerro {
         //<------------FIN CUELLO------------->
         
         //<------------OREJA IZQ ------------->
+        Transform3D t3dOrejaIzq = new Transform3D();
+        
         //<-----------FIN OREJA IZQ----------->
             
         
