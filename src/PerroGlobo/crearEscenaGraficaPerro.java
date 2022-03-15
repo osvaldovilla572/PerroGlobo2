@@ -80,7 +80,9 @@ class crearEscenaGraficaPerro {
         tgEsferaCuello2.addChild(esferaCuello2);
         //<------------FIN CUELLO------------->
         
-        
+        //<------------OREJA IZQ ------------->
+        //<-----------FIN OREJA IZQ----------->
+            
         
     }
     
