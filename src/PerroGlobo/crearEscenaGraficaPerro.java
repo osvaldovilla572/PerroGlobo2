@@ -60,6 +60,7 @@ class crearEscenaGraficaPerro {
         //<------ FIN FINAL COLA-------->
         
         System.out.println("nomas para probar esta cosa");
+        System.out.println("verificando que si baje los cambios");
     }
     
 }
