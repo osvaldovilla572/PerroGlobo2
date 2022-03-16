@@ -59,6 +59,7 @@ class crearEscenaGraficaPerro {
         cola2.tgCapsula.setTransform(t3dMoverColita2);
         //<------ FIN FINAL COLA-------->
         
+        System.out.println("nomas para probar esta cosa");
     }
     
 }
