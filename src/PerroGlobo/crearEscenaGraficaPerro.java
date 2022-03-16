@@ -62,6 +62,8 @@ class crearEscenaGraficaPerro {
         System.out.println("nomas para probar esta cosa");
         System.out.println("verificando que si baje los cambios");
         System.out.println("Probando desde la otra PC");
+        System.out.println("Por favor, que ya sirva esta chingadera plis, ya me cansé alv");
+        
     }
     
 }
