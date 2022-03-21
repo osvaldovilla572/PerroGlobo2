@@ -23,9 +23,9 @@ public class PerroFrame extends javax.swing.JFrame {
         initComponents();
         GraphicsConfiguration config =SimpleUniverse.getPreferredConfiguration();
         Canvas3D lienzo=new Canvas3D(config);
-        lienzo.setBounds(20, 20, 900, 900);
+        lienzo.setBounds(20, 20, 700, 650);
         this.add(lienzo);
-        this.setBounds(250, 50, 1000, 1000);
+        this.setBounds(250, 50, 800, 800);
         setLocationRelativeTo(null);
         BranchGroup Scene=new BranchGroup();
         crearEscenaGraficaPerro creaEscena= new crearEscenaGraficaPerro();
