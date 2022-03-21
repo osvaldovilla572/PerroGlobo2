@@ -5,9 +5,12 @@
  */
 package PerroGlobo;
 
+import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
+import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Sphere;
 import javax.media.j3d.Appearance;
+import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
@@ -24,14 +27,18 @@ class crearEscenaGraficaPerro {
     public crearEscenaGraficaPerro(){
         
         capsula panza = new capsula(1,1);
-        capsula cabeza = new capsula(0.4f,0.27f);
-        capsula cola1 = new capsula(0.3f,0.15f);
-        capsula cola2 = new capsula(0.1f,0.3f);
-        
-        objRaiz.addChild(panza.tgCapsula);
-        objRaiz.addChild(cabeza.tgCapsula);
-        panza.tgCapsula.addChild(cola1.tgCapsula);
-        cola1.tgCapsula.addChild(cola2.tgCapsula);
+        capsula cabeza = new capsula(0.5f,0.27f);
+        capsula cola1 = new capsula(0.45f,0.2f);
+        capsula cola2 = new capsula(0.1f,0.4f);
+        capsula pataTraseraIzq = new capsula(0.45f, 0.65f);
+        capsula pataTraseraDer = new capsula(0.45f, 0.65f);
+        capsula pataDelanteraIzq = new capsula(0.45f, 0.65f);
+        capsula pataDelanteraDer = new capsula(0.45f, 0.65f);
+        capsula orejaIzq = new capsula(0.5f, 0.5f);
+        capsula orejaDer = new capsula(0.5f, 0.5f);
+        capsula boca = new capsula(0.5f, 0.3f);
+        //Cone nariz = new Cone(0.05f,0.2f);
+                
         //<------CABEZA----->
         Transform3D t3dGirarCabeza = new Transform3D();
         Transform3D t3dMoverCabeza = new Transform3D();
@@ -44,8 +51,8 @@ class crearEscenaGraficaPerro {
         //<-----BASE COLA---->
         Transform3D t3dGirarColita1 = new Transform3D();
         Transform3D t3dMoverColita1 = new Transform3D();
-        t3dMoverColita1.setTranslation(new Vector3f(0.25f,0.45f,0.0f));
-        t3dGirarColita1.rotZ(Math.PI/180*-60);
+        t3dMoverColita1.setTranslation(new Vector3f(-0.47f,0.27f,0.0f));
+        t3dGirarColita1.rotZ(Math.PI/180*30);
         t3dMoverColita1.mul(t3dGirarColita1);
         cola1.tgCapsula.setTransform(t3dMoverColita1);
         //<------FIN BASE COLA------->
@@ -59,10 +66,109 @@ class crearEscenaGraficaPerro {
         cola2.tgCapsula.setTransform(t3dMoverColita2);
         //<------ FIN FINAL COLA-------->
         
-        System.out.println("nomas para probar esta cosa");
-        System.out.println("verificando que si baje los cambios");
-        System.out.println("Probando desde la otra PC");
-        System.out.println("Por favor, que ya sirva esta chingadera plis, ya me cansé alv");
+       //<-------PATA TRASERA IZQ----------->
+       Transform3D t3dPataTraseraIzq = new Transform3D();
+       Transform3D t3dMoverPataTraseraIzq = new Transform3D();
+       t3dMoverPataTraseraIzq.setTranslation(new Vector3f(-0.35f,0.27f,0.22f));
+       t3dPataTraseraIzq.rotZ(Math.PI/180*90);
+       t3dMoverPataTraseraIzq.mul(t3dPataTraseraIzq);
+       pataTraseraIzq.tgCapsula.setTransform(t3dMoverPataTraseraIzq);
+       //<-------FIN PATA TRASERA IZQ------>
+       
+       
+       //<-------PATA TRASERA DER----------->
+       Transform3D t3dPataTraseraDer = new Transform3D();
+       Transform3D t3dMoverPataTraseraDer = new Transform3D();
+       t3dMoverPataTraseraDer.setTranslation(new Vector3f(-0.35f,0.27f,-0.22f));
+       t3dPataTraseraDer.rotZ(Math.PI/180*90);
+       t3dMoverPataTraseraDer.mul(t3dPataTraseraDer);
+       pataTraseraDer.tgCapsula.setTransform(t3dMoverPataTraseraDer);
+       //<-------FIN PATA TRASERA DER------>
+       
+       //<-------PATA DELANTERA IZQ----------->
+       Transform3D t3dPataDelanteraIzq = new Transform3D();
+       Transform3D t3dMoverPataDelanteraIzq = new Transform3D();
+       t3dMoverPataDelanteraIzq.setTranslation(new Vector3f(-0.35f,-0.27f,0.22f));
+       t3dPataDelanteraIzq.rotZ(Math.PI/180*90);
+       t3dMoverPataDelanteraIzq.mul(t3dPataDelanteraIzq);
+       pataDelanteraIzq.tgCapsula.setTransform(t3dMoverPataDelanteraIzq);
+       //<-------FIN PATA DELANTERA IZQ------>
+       
+       //<-------PATA DELANTERA DER----------->
+       Transform3D t3dPataDelanteraDer = new Transform3D();
+       Transform3D t3dMoverPataDelanteraDer = new Transform3D();
+       t3dMoverPataDelanteraDer.setTranslation(new Vector3f(-0.35f,-0.27f,-0.22f));
+       t3dPataDelanteraDer.rotZ(Math.PI/180*90);
+       t3dMoverPataDelanteraDer.mul(t3dPataDelanteraDer);
+       pataDelanteraDer.tgCapsula.setTransform(t3dMoverPataDelanteraDer);
+       //<-------FIN PATA DELANTERA DER------>
+       
+       //<------------OREJA IZQ-------->
+       Transform3D t3dOrejaIzq = new Transform3D();
+       Transform3D t3dMoverOrejaIzq = new Transform3D();
+       t3dMoverOrejaIzq.setTranslation(new Vector3f(-0.25f,0.25f,0.11f));
+       t3dOrejaIzq.rotZ(Math.PI/180*45);
+       t3dMoverOrejaIzq.mul(t3dOrejaIzq);
+       orejaIzq.tgCapsula.setTransform(t3dMoverOrejaIzq);
+       //<---------FIN OREJA IZQ------->
+       
+       //<---------OREJA DER--------->
+       Transform3D t3dOrejaDer = new Transform3D();
+       Transform3D t3dMoverOrejaDer = new Transform3D();
+       t3dMoverOrejaDer.setTranslation(new Vector3f(-0.25f,0.25f,-0.11f));
+       t3dOrejaDer.rotZ(Math.PI/180*45);
+       t3dMoverOrejaDer.mul(t3dOrejaDer);
+       orejaDer.tgCapsula.setTransform(t3dMoverOrejaDer);
+       //<------FIN OREJA DER------->
+       
+       //<----------BOCA------------->
+       Transform3D t3dBoca = new Transform3D();
+       Transform3D t3dMoverBoca = new Transform3D();
+       t3dMoverBoca.setTranslation(new Vector3f(0.22f,0.25f,0.0f));
+       t3dBoca.rotZ(Math.PI/180*125);
+       t3dMoverBoca.mul(t3dBoca);
+       boca.tgCapsula.setTransform(t3dMoverBoca);
+      //<---------FIN BOCA---------->
+       
+       //<--------------NARIZ----------->
+       Appearance apBlanca = new Appearance();
+      
+       Transform3D t3dMoverNariz = new Transform3D();
+       t3dMoverNariz.setTranslation(new Vector3f(0.0f,-0.2f,0.0f));
+       
+        TransformGroup tgNariz = new TransformGroup(t3dMoverNariz);
+        Cone nariz = new Cone(0.04f,0.04f,apBlanca);
+//       t3dNariz.rotZ(Math.PI/180);
+         tgNariz.addChild(nariz);
+       //<-----------FIN NARIZ---------->
+       
+       //<---------ROTAR CON MOUSE--------->
+       TransformGroup objRotate = new TransformGroup();
+        objRotate.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        objRotate.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+        objRaiz.addChild(objRotate);
+        
+        MouseRotate myMouseRotate = new MouseRotate();
+        myMouseRotate.setTransformGroup(objRotate);
+        myMouseRotate.setSchedulingBounds(new BoundingSphere());
+        objRaiz.addChild(myMouseRotate);
+            
+                objRotate.addChild(panza.tgCapsula);
+                objRotate.addChild(cabeza.tgCapsula);
+                objRotate.addChild(cola1.tgCapsula);
+                cola1.tgCapsula.addChild(cola2.tgCapsula);
+                panza.tgCapsula.addChild(pataTraseraIzq.tgCapsula);
+                panza.tgCapsula.addChild(pataTraseraDer.tgCapsula);
+                panza.tgCapsula.addChild(pataDelanteraIzq.tgCapsula);
+                panza.tgCapsula.addChild(pataDelanteraDer.tgCapsula);
+                cabeza.tgCapsula.addChild(orejaIzq.tgCapsula);
+                cabeza.tgCapsula.addChild(orejaDer.tgCapsula);
+                cabeza.tgCapsula.addChild(boca.tgCapsula);
+                boca.tgCapsula.addChild(tgNariz);
+                
+       //<------FIN ROTAR CON MOUSE------->
+       
+       
         
     }
     
