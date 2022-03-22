@@ -6,6 +6,7 @@
 package PerroGlobo;
 
 import com.sun.j3d.utils.geometry.Cylinder;
+import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.Transform3D;
@@ -20,13 +21,16 @@ public class capsula {
     
     TransformGroup tgCapsula;
     
+    int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
+    Textura textura = new Textura();
+    
     public capsula(float t, float a){
         Appearance apBlanca = new Appearance();
         
         Transform3D t3dCapsula = new Transform3D();
         t3dCapsula.rotZ(Math.PI/180*90);
         tgCapsula = new TransformGroup(t3dCapsula);
-        Cylinder panza = new Cylinder(0.2f*t,0.6f*a,apBlanca);
+        Cylinder panza = new Cylinder(0.2f*t,0.6f*a,paraTextura,textura.crearTexturas("pieldalmata.jpg"));
         //objRaiz.addChild(tgCapsula);
         tgCapsula.addChild(panza);
         
@@ -35,7 +39,7 @@ public class capsula {
         t3dEsferaCapsula1.setTranslation(new Vector3f(0.0f,0.3f*a,0.0f));
         
         TransformGroup tgEsferaCapsula1 = new TransformGroup(t3dEsferaCapsula1);
-        Sphere esferaCapsula1 = new Sphere(0.2f*t,apBlanca);
+        Sphere esferaCapsula1 = new Sphere(0.2f*t,paraTextura,textura.crearTexturas("pieldalmata.jpg"));
         tgCapsula.addChild(tgEsferaCapsula1);
         tgEsferaCapsula1.addChild(esferaCapsula1);
         
@@ -44,7 +48,7 @@ public class capsula {
         t3dEsferaCapsula2.setTranslation(new Vector3f(0.0f,-0.3f*a,0.0f));
         
         TransformGroup tgEsferaCapsula2 = new TransformGroup(t3dEsferaCapsula2);
-        Sphere esferaCapsula2 = new Sphere(0.2f*t,apBlanca);
+        Sphere esferaCapsula2 = new Sphere(0.2f*t,paraTextura,textura.crearTexturas("pieldalmata.jpg"));
         tgCapsula.addChild(tgEsferaCapsula2);
         tgEsferaCapsula2.addChild(esferaCapsula2);
     }

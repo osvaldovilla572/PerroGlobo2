@@ -8,6 +8,7 @@ package PerroGlobo;
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
 import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.geometry.Cylinder;
+import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
@@ -26,6 +27,9 @@ class crearEscenaGraficaPerro {
     
     public crearEscenaGraficaPerro(){
         
+        int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
+        Textura textura = new Textura();
+        
         capsula panza = new capsula(1,1);
         capsula cabeza = new capsula(0.5f,0.27f);
         capsula cola1 = new capsula(0.45f,0.2f);
@@ -42,8 +46,8 @@ class crearEscenaGraficaPerro {
         //<------CABEZA----->
         Transform3D t3dGirarCabeza = new Transform3D();
         Transform3D t3dMoverCabeza = new Transform3D();
-        t3dMoverCabeza.setTranslation(new Vector3f(0.38f,0.34f,0.0f));
-        t3dGirarCabeza.rotZ(Math.PI/180*-25);
+        t3dMoverCabeza.setTranslation(new Vector3f(0.34f,-0.43f,0.0f));
+        t3dGirarCabeza.rotZ(Math.PI/180*-120);
         t3dMoverCabeza.mul(t3dGirarCabeza);
         cabeza.tgCapsula.setTransform(t3dMoverCabeza);
         //<----FIN CABEZA---->
@@ -51,8 +55,8 @@ class crearEscenaGraficaPerro {
         //<-----BASE COLA---->
         Transform3D t3dGirarColita1 = new Transform3D();
         Transform3D t3dMoverColita1 = new Transform3D();
-        t3dMoverColita1.setTranslation(new Vector3f(-0.47f,0.27f,0.0f));
-        t3dGirarColita1.rotZ(Math.PI/180*30);
+        t3dMoverColita1.setTranslation(new Vector3f(0.3f,0.43f,0.0f));
+        t3dGirarColita1.rotZ(Math.PI/180*-60);
         t3dMoverColita1.mul(t3dGirarColita1);
         cola1.tgCapsula.setTransform(t3dMoverColita1);
         //<------FIN BASE COLA------->
@@ -154,8 +158,8 @@ class crearEscenaGraficaPerro {
         objRaiz.addChild(myMouseRotate);
             
                 objRotate.addChild(panza.tgCapsula);
-                objRotate.addChild(cabeza.tgCapsula);
-                objRotate.addChild(cola1.tgCapsula);
+                panza.tgCapsula.addChild(cabeza.tgCapsula);
+                panza.tgCapsula.addChild(cola1.tgCapsula);
                 cola1.tgCapsula.addChild(cola2.tgCapsula);
                 panza.tgCapsula.addChild(pataTraseraIzq.tgCapsula);
                 panza.tgCapsula.addChild(pataTraseraDer.tgCapsula);
