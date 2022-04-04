@@ -25,24 +25,25 @@ class crearEscenaGraficaPerro {
     
     BranchGroup objRaiz = new BranchGroup();
     
+    Apariencia ap = new Apariencia();
+    
+    capsula panza = new capsula(1,1);
+    capsula cabeza = new capsula(0.5f,0.27f);
+    capsula cola1 = new capsula(0.45f,0.2f);
+    capsula cola2 = new capsula(0.1f,0.4f);
+    capsula pataTraseraIzq = new capsula(0.45f, 0.65f);
+    capsula pataTraseraDer = new capsula(0.45f, 0.65f);
+    capsula pataDelanteraIzq = new capsula(0.45f, 0.65f);
+    capsula pataDelanteraDer = new capsula(0.45f, 0.65f);
+    capsula orejaIzq = new capsula(0.5f, 0.5f);
+    capsula orejaDer = new capsula(0.5f, 0.5f);
+    capsula boca = new capsula(0.5f, 0.3f);
+    TransformGroup tgMoverEsferaPDD;
+    
     public crearEscenaGraficaPerro(){
-        
         int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
         Textura textura = new Textura();
         
-        capsula panza = new capsula(1,1);
-        capsula cabeza = new capsula(0.5f,0.27f);
-        capsula cola1 = new capsula(0.45f,0.2f);
-        capsula cola2 = new capsula(0.1f,0.4f);
-        capsula pataTraseraIzq = new capsula(0.45f, 0.65f);
-        capsula pataTraseraDer = new capsula(0.45f, 0.65f);
-        capsula pataDelanteraIzq = new capsula(0.45f, 0.65f);
-        capsula pataDelanteraDer = new capsula(0.45f, 0.65f);
-        capsula orejaIzq = new capsula(0.5f, 0.5f);
-        capsula orejaDer = new capsula(0.5f, 0.5f);
-        capsula boca = new capsula(0.5f, 0.3f);
-        //Cone nariz = new Cone(0.05f,0.2f);
-                
         //<------CABEZA----->
         Transform3D t3dGirarCabeza = new Transform3D();
         Transform3D t3dMoverCabeza = new Transform3D();
@@ -101,10 +102,22 @@ class crearEscenaGraficaPerro {
        //<-------PATA DELANTERA DER----------->
        Transform3D t3dPataDelanteraDer = new Transform3D();
        Transform3D t3dMoverPataDelanteraDer = new Transform3D();
-       t3dMoverPataDelanteraDer.setTranslation(new Vector3f(-0.35f,-0.27f,-0.22f));
+       t3dMoverPataDelanteraDer.setTranslation(new Vector3f(-0.2f,0.0f,0.0f));
        t3dPataDelanteraDer.rotZ(Math.PI/180*90);
        t3dMoverPataDelanteraDer.mul(t3dPataDelanteraDer);
        pataDelanteraDer.tgCapsula.setTransform(t3dMoverPataDelanteraDer);
+       
+       Transform3D t3dMoverEsferaPDD = new Transform3D();
+       Transform3D t3dGirarESferaPDD = new Transform3D();
+       t3dMoverEsferaPDD.setTranslation(new Vector3f(-0.16f,-0.27f,-0.22f));
+       t3dGirarESferaPDD.rotZ(Math.PI/180);
+       t3dMoverEsferaPDD.mul(t3dGirarESferaPDD);
+       tgMoverEsferaPDD = new TransformGroup(t3dMoverEsferaPDD);
+       Sphere esferaGiro = new Sphere(0.09f,ap.color(0,0,0));
+       tgMoverEsferaPDD.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+       tgMoverEsferaPDD.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+       tgMoverEsferaPDD.addChild(esferaGiro);
+       
        //<-------FIN PATA DELANTERA DER------>
        
        //<------------OREJA IZQ-------->
@@ -164,7 +177,9 @@ class crearEscenaGraficaPerro {
                 panza.tgCapsula.addChild(pataTraseraIzq.tgCapsula);
                 panza.tgCapsula.addChild(pataTraseraDer.tgCapsula);
                 panza.tgCapsula.addChild(pataDelanteraIzq.tgCapsula);
-                panza.tgCapsula.addChild(pataDelanteraDer.tgCapsula);
+                //panza.tgCapsula.addChild(pataDelanteraDer.tgCapsula);
+                tgMoverEsferaPDD.addChild(pataDelanteraDer.tgCapsula);
+                panza.tgCapsula.addChild(tgMoverEsferaPDD);
                 cabeza.tgCapsula.addChild(orejaIzq.tgCapsula);
                 cabeza.tgCapsula.addChild(orejaDer.tgCapsula);
                 cabeza.tgCapsula.addChild(boca.tgCapsula);
