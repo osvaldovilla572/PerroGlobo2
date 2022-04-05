@@ -9,6 +9,7 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import java.awt.GraphicsConfiguration;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
+import javax.media.j3d.Transform3D;
 
 /**
  *
@@ -19,6 +20,9 @@ public class PerroFrame extends javax.swing.JFrame {
     /**
      * Creates new form PerroFrame
      */
+    
+    crearEscenaGraficaPerro creaEscena;
+    
     public PerroFrame() {
         initComponents();
         GraphicsConfiguration config =SimpleUniverse.getPreferredConfiguration();
@@ -28,7 +32,7 @@ public class PerroFrame extends javax.swing.JFrame {
         this.setBounds(250, 50, 800, 800);
         setLocationRelativeTo(null);
         BranchGroup Scene=new BranchGroup();
-        crearEscenaGraficaPerro creaEscena= new crearEscenaGraficaPerro();
+        creaEscena= new crearEscenaGraficaPerro();
         Scene=creaEscena.objRaiz;
         SimpleUniverse n=new SimpleUniverse(lienzo);
         n.getViewingPlatform().setNominalViewingTransform();
@@ -44,21 +48,48 @@ public class PerroFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton2.setText("Mover pata");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(485, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jButton2)
+                .addContainerGap(431, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Transform3D leer = new Transform3D();
+        Transform3D giro = new Transform3D();
+        creaEscena.tgMoverEsferaPDD.getTransform(leer);
+        giro.rotZ(Math.PI/180*15);
+        leer.mul(giro);
+        creaEscena.tgMoverEsferaPDD.setTransform(leer);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,5 +127,7 @@ public class PerroFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,6 +30,8 @@ public class capsula {
         Transform3D t3dCapsula = new Transform3D();
         t3dCapsula.rotZ(Math.PI/180*90);
         tgCapsula = new TransformGroup(t3dCapsula);
+        tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         Cylinder panza = new Cylinder(0.2f*t,0.6f*a,paraTextura,textura.crearTexturas("pieldalmata.jpg"));
         //objRaiz.addChild(tgCapsula);
         tgCapsula.addChild(panza);
