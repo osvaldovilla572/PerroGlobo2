@@ -39,6 +39,9 @@ class crearEscenaGraficaPerro {
     capsula orejaDer = new capsula(0.5f, 0.5f);
     capsula boca = new capsula(0.5f, 0.3f);
     TransformGroup tgMoverEsferaPDD;
+    TransformGroup tgMoverEsferaPDI;
+    TransformGroup tgMoverEsferaPTD;
+    TransformGroup tgMoverEsferaPTI;
     
     public crearEscenaGraficaPerro(){
         int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
@@ -74,29 +77,63 @@ class crearEscenaGraficaPerro {
        //<-------PATA TRASERA IZQ----------->
        Transform3D t3dPataTraseraIzq = new Transform3D();
        Transform3D t3dMoverPataTraseraIzq = new Transform3D();
-       t3dMoverPataTraseraIzq.setTranslation(new Vector3f(-0.35f,0.27f,0.22f));
+       t3dMoverPataTraseraIzq.setTranslation(new Vector3f(-0.2f,0.0f,0.0f));
        t3dPataTraseraIzq.rotZ(Math.PI/180*90);
        t3dMoverPataTraseraIzq.mul(t3dPataTraseraIzq);
        pataTraseraIzq.tgCapsula.setTransform(t3dMoverPataTraseraIzq);
+       
+       Transform3D t3dMoverEsferaPTI = new Transform3D();
+       Transform3D t3dGirarESferaPTI = new Transform3D();
+       t3dMoverEsferaPTI.setTranslation(new Vector3f(-0.16f,0.27f,0.22f));
+       t3dGirarESferaPTI.rotZ(Math.PI/180);
+       t3dMoverEsferaPTI.mul(t3dGirarESferaPTI);
+       tgMoverEsferaPTI = new TransformGroup(t3dMoverEsferaPTI);
+       Sphere esferaGiroPTI = new Sphere(0.09f,ap.color(0,0,0));
+       tgMoverEsferaPTI.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+       tgMoverEsferaPTI.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+       tgMoverEsferaPTI.addChild(esferaGiroPTI);
+
        //<-------FIN PATA TRASERA IZQ------>
        
        
        //<-------PATA TRASERA DER----------->
        Transform3D t3dPataTraseraDer = new Transform3D();
        Transform3D t3dMoverPataTraseraDer = new Transform3D();
-       t3dMoverPataTraseraDer.setTranslation(new Vector3f(-0.35f,0.27f,-0.22f));
+       t3dMoverPataTraseraDer.setTranslation(new Vector3f(-0.2f,0.0f,-0.0f));
        t3dPataTraseraDer.rotZ(Math.PI/180*90);
        t3dMoverPataTraseraDer.mul(t3dPataTraseraDer);
        pataTraseraDer.tgCapsula.setTransform(t3dMoverPataTraseraDer);
+       
+       Transform3D t3dMoverEsferaPTD = new Transform3D();
+       Transform3D t3dGirarESferaPTD = new Transform3D();
+       t3dMoverEsferaPTD.setTranslation(new Vector3f(-0.16f,0.27f,-0.22f));
+       t3dGirarESferaPTD.rotZ(Math.PI/180);
+       t3dMoverEsferaPTD.mul(t3dGirarESferaPTD);
+       tgMoverEsferaPTD = new TransformGroup(t3dMoverEsferaPTD);
+       Sphere esferaGiroPTD = new Sphere(0.09f,ap.color(0,0,0));
+       tgMoverEsferaPTD.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+       tgMoverEsferaPTD.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+       tgMoverEsferaPTD.addChild(esferaGiroPTD);
        //<-------FIN PATA TRASERA DER------>
        
        //<-------PATA DELANTERA IZQ----------->
        Transform3D t3dPataDelanteraIzq = new Transform3D();
        Transform3D t3dMoverPataDelanteraIzq = new Transform3D();
-       t3dMoverPataDelanteraIzq.setTranslation(new Vector3f(-0.35f,-0.27f,0.22f));
+       t3dMoverPataDelanteraIzq.setTranslation(new Vector3f(-0.2f,-0.0f,0.0f));
        t3dPataDelanteraIzq.rotZ(Math.PI/180*90);
        t3dMoverPataDelanteraIzq.mul(t3dPataDelanteraIzq);
        pataDelanteraIzq.tgCapsula.setTransform(t3dMoverPataDelanteraIzq);
+       
+       Transform3D t3dMoverEsferaPDI = new Transform3D();
+       Transform3D t3dGirarESferaPDI = new Transform3D();
+       t3dMoverEsferaPDI.setTranslation(new Vector3f(-0.16f,-0.27f,0.22f));
+       t3dGirarESferaPDI.rotZ(Math.PI/180);
+       t3dMoverEsferaPDI.mul(t3dGirarESferaPDI);
+       tgMoverEsferaPDI = new TransformGroup(t3dMoverEsferaPDI);
+       Sphere esferaGiroPDI = new Sphere(0.09f,ap.color(0,0,0));
+       tgMoverEsferaPDI.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+       tgMoverEsferaPDI.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+       tgMoverEsferaPDI.addChild(esferaGiroPDI);
        //<-------FIN PATA DELANTERA IZQ------>
        
        //<-------PATA DELANTERA DER----------->
@@ -113,10 +150,10 @@ class crearEscenaGraficaPerro {
        t3dGirarESferaPDD.rotZ(Math.PI/180);
        t3dMoverEsferaPDD.mul(t3dGirarESferaPDD);
        tgMoverEsferaPDD = new TransformGroup(t3dMoverEsferaPDD);
-       Sphere esferaGiro = new Sphere(0.09f,ap.color(0,0,0));
+       Sphere esferaGiroPDD = new Sphere(0.09f,ap.color(0,0,0));
        tgMoverEsferaPDD.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
        tgMoverEsferaPDD.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-       tgMoverEsferaPDD.addChild(esferaGiro);
+       tgMoverEsferaPDD.addChild(esferaGiroPDD);
        
        //<-------FIN PATA DELANTERA DER------>
        
@@ -174,12 +211,14 @@ class crearEscenaGraficaPerro {
                 panza.tgCapsula.addChild(cabeza.tgCapsula);
                 panza.tgCapsula.addChild(cola1.tgCapsula);
                 cola1.tgCapsula.addChild(cola2.tgCapsula);
-                panza.tgCapsula.addChild(pataTraseraIzq.tgCapsula);
-                panza.tgCapsula.addChild(pataTraseraDer.tgCapsula);
-                panza.tgCapsula.addChild(pataDelanteraIzq.tgCapsula);
-                //panza.tgCapsula.addChild(pataDelanteraDer.tgCapsula);
+                tgMoverEsferaPDI.addChild(pataDelanteraIzq.tgCapsula);
                 tgMoverEsferaPDD.addChild(pataDelanteraDer.tgCapsula);
+                tgMoverEsferaPTD.addChild(pataTraseraDer.tgCapsula);
+                tgMoverEsferaPTI.addChild(pataTraseraIzq.tgCapsula);
                 panza.tgCapsula.addChild(tgMoverEsferaPDD);
+                panza.tgCapsula.addChild(tgMoverEsferaPDI);
+                panza.tgCapsula.addChild(tgMoverEsferaPTD);
+                panza.tgCapsula.addChild(tgMoverEsferaPTI);
                 cabeza.tgCapsula.addChild(orejaIzq.tgCapsula);
                 cabeza.tgCapsula.addChild(orejaDer.tgCapsula);
                 cabeza.tgCapsula.addChild(boca.tgCapsula);
