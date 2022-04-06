@@ -10,6 +10,7 @@ import java.awt.GraphicsConfiguration;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
+import javax.vecmath.Vector3f;
 
 /**
  *
@@ -22,14 +23,15 @@ public class PerroFrame extends javax.swing.JFrame {
      */
     
     crearEscenaGraficaPerro creaEscena;
-    
+    int contador = 0;
     public PerroFrame() {
         initComponents();
         GraphicsConfiguration config =SimpleUniverse.getPreferredConfiguration();
         Canvas3D lienzo=new Canvas3D(config);
-        lienzo.setBounds(20, 20, 700, 650);
+        lienzo.setBounds(20, 20, 580, 500);
+        this.setTitle("Perro globo graficación 2022");
         this.add(lienzo);
-        this.setBounds(250, 50, 800, 800);
+        this.setBounds(250, 50, 800, 600);
         setLocationRelativeTo(null);
         BranchGroup Scene=new BranchGroup();
         creaEscena= new crearEscenaGraficaPerro();
@@ -49,16 +51,16 @@ public class PerroFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCaminar = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Mover pata");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCaminar.setText("Caminar");
+        btnCaminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCaminarActionPerformed(evt);
             }
         });
 
@@ -67,29 +69,66 @@ public class PerroFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(485, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addContainerGap(619, Short.MAX_VALUE)
+                .addComponent(btnCaminar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jButton2)
-                .addContainerGap(431, Short.MAX_VALUE))
+                .addComponent(btnCaminar)
+                .addContainerGap(347, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Transform3D leer = new Transform3D();
-        Transform3D giro = new Transform3D();
-        creaEscena.tgMoverEsferaPDD.getTransform(leer);
-        giro.rotZ(Math.PI/180*15);
-        leer.mul(giro);
-        creaEscena.tgMoverEsferaPDD.setTransform(leer);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnCaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaminarActionPerformed
+        contador++;
+        
+        Transform3D leerPanza = new Transform3D();
+        Transform3D MoverPanza = new Transform3D();
+        creaEscena.panza.tgCapsula.getTransform(leerPanza);
+        MoverPanza.setTranslation(new Vector3f(0.0f,-0.02f,0.0f));
+        leerPanza.mul(MoverPanza);
+        creaEscena.panza.tgCapsula.setTransform(leerPanza);
+        
+        
+        if(contador<5){
+            Transform3D leer = new Transform3D();
+            Transform3D giro = new Transform3D();
+            creaEscena.tgMoverEsferaPDD.getTransform(leer);
+            giro.rotZ(Math.PI/180*15);
+            leer.mul(giro);
+            creaEscena.tgMoverEsferaPDD.setTransform(leer);
+
+            Transform3D leer2 = new Transform3D();
+            Transform3D giro2 = new Transform3D();
+            creaEscena.tgMoverEsferaPDI.getTransform(leer2);
+            giro2.rotZ(Math.PI/180*-15);
+            leer2.mul(giro2);
+            creaEscena.tgMoverEsferaPDI.setTransform(leer2);
+        }
+        else if(contador<9)
+        {
+            Transform3D leer = new Transform3D();
+            Transform3D giro = new Transform3D();
+            creaEscena.tgMoverEsferaPDD.getTransform(leer);
+            giro.rotZ(Math.PI/180*-15);
+            leer.mul(giro);
+            creaEscena.tgMoverEsferaPDD.setTransform(leer);
+
+            Transform3D leer2 = new Transform3D();
+            Transform3D giro2 = new Transform3D();
+            creaEscena.tgMoverEsferaPDI.getTransform(leer2);
+            giro2.rotZ(Math.PI/180*15);
+            leer2.mul(giro2);
+            creaEscena.tgMoverEsferaPDI.setTransform(leer2);
+        }
+     
+        
+    }//GEN-LAST:event_btnCaminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,7 +166,7 @@ public class PerroFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCaminar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }

@@ -47,6 +47,9 @@ class crearEscenaGraficaPerro {
         int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
         Textura textura = new Textura();
         
+        panza.tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+        panza.tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        
         //<------CABEZA----->
         Transform3D t3dGirarCabeza = new Transform3D();
         Transform3D t3dMoverCabeza = new Transform3D();
