@@ -53,10 +53,10 @@ public class PerroFrame extends javax.swing.JFrame {
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyChar()) {
                     case 'a':
-                        creaEscena.girar(creaEscena.panza.tgCapsula, 5, "x");
+                        creaEscena.girar(creaEscena.panza.tgCapsula, 8, "x");
                         break;
                     case 'd':
-                        creaEscena.girar(creaEscena.panza.tgCapsula, -5, "x");
+                        creaEscena.girar(creaEscena.panza.tgCapsula, -8, "x");
                         break;
                 }
 
