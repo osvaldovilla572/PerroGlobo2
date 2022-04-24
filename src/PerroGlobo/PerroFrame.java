@@ -7,9 +7,12 @@ package PerroGlobo;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import java.awt.GraphicsConfiguration;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3f;
 
 /**
@@ -24,6 +27,7 @@ public class PerroFrame extends javax.swing.JFrame {
     
     crearEscenaGraficaPerro creaEscena;
     int contador = 0;
+    HiloCaminata hilo;
     public PerroFrame() {
         initComponents();
         GraphicsConfiguration config =SimpleUniverse.getPreferredConfiguration();
@@ -39,7 +43,72 @@ public class PerroFrame extends javax.swing.JFrame {
         SimpleUniverse n=new SimpleUniverse(lienzo);
         n.getViewingPlatform().setNominalViewingTransform();
         n.addBranchGraph(Scene);
+        hilo = new HiloCaminata(creaEscena);
+        lienzo.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyChar()) {
+                    case 'a':
+                        creaEscena.girar(creaEscena.panza.tgCapsula, 5, "x");
+                        break;
+                    case 'd':
+                        creaEscena.girar(creaEscena.panza.tgCapsula, -5, "x");
+                        break;
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                switch (e.getKeyChar()) {
+                    case 'c':
+
+                        if (hilo.c == true) {
+                            hilo.c = false;
+                            hilo= new HiloCaminata(creaEscena);
+                        } else {
+
+                            hilo.start();
+                            hilo.c = true;
+                        }
+                        break;
+                }
+            }
+        });
     }
+    
+//    public static void  Caminar(TransformGroup t, int g, String eje)
+//    {
+//        
+//        Transform3D lectura=new Transform3D();
+//        Transform3D escritura=new Transform3D();
+//        
+//        t.getTransform(lectura);
+//        if (eje.equals("z")) {
+//            escritura.rotZ(Math.PI / 180 * g);
+//        }
+//        if (eje.equals("y")) {
+//            escritura.rotY(Math.PI / 180 * g);
+//        }
+//        if (eje.equals("x")) {
+//            escritura.rotX(Math.PI / 180 * g);
+//        }
+//        lectura.mul(escritura);
+//        t.setTransform(lectura);
+//    }
+//    
+//     public void mover(TransformGroup t, float x, float y, float z) {
+//        Transform3D lectura = new Transform3D();
+//        Transform3D escritura = new Transform3D();
+//        t.getTransform(lectura);
+//        escritura.setTranslation(new Vector3f(x, y, z));
+//        lectura.mul(escritura);
+//        t.setTransform(lectura);
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,49 +154,15 @@ public class PerroFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCaminarActionPerformed
-        contador++;
-        
-        Transform3D leerPanza = new Transform3D();
-        Transform3D MoverPanza = new Transform3D();
-        creaEscena.panza.tgCapsula.getTransform(leerPanza);
-        MoverPanza.setTranslation(new Vector3f(0.0f,-0.02f,0.0f));
-        leerPanza.mul(MoverPanza);
-        creaEscena.panza.tgCapsula.setTransform(leerPanza);
-        
-        
-        if(contador<5){
-            Transform3D leer = new Transform3D();
-            Transform3D giro = new Transform3D();
-            creaEscena.tgMoverEsferaPDD.getTransform(leer);
-            giro.rotZ(Math.PI/180*15);
-            leer.mul(giro);
-            creaEscena.tgMoverEsferaPDD.setTransform(leer);
-
-            Transform3D leer2 = new Transform3D();
-            Transform3D giro2 = new Transform3D();
-            creaEscena.tgMoverEsferaPDI.getTransform(leer2);
-            giro2.rotZ(Math.PI/180*-15);
-            leer2.mul(giro2);
-            creaEscena.tgMoverEsferaPDI.setTransform(leer2);
-        }
-        else if(contador<9)
+        //creaEscena.Caminata();
+        if(hilo.c == true)
         {
-            Transform3D leer = new Transform3D();
-            Transform3D giro = new Transform3D();
-            creaEscena.tgMoverEsferaPDD.getTransform(leer);
-            giro.rotZ(Math.PI/180*-15);
-            leer.mul(giro);
-            creaEscena.tgMoverEsferaPDD.setTransform(leer);
-
-            Transform3D leer2 = new Transform3D();
-            Transform3D giro2 = new Transform3D();
-            creaEscena.tgMoverEsferaPDI.getTransform(leer2);
-            giro2.rotZ(Math.PI/180*15);
-            leer2.mul(giro2);
-            creaEscena.tgMoverEsferaPDI.setTransform(leer2);
+            hilo.c=false;
+            hilo = new HiloCaminata(creaEscena);
+        } else {
+            hilo.start();
+            hilo.c=true;
         }
-     
-        
     }//GEN-LAST:event_btnCaminarActionPerformed
 
     /**

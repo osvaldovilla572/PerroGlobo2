@@ -42,6 +42,7 @@ class crearEscenaGraficaPerro {
     TransformGroup tgMoverEsferaPDI;
     TransformGroup tgMoverEsferaPTD;
     TransformGroup tgMoverEsferaPTI;
+    int contador;
     
     public crearEscenaGraficaPerro(){
         int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
@@ -228,9 +229,91 @@ class crearEscenaGraficaPerro {
                 boca.tgCapsula.addChild(tgNariz);
                 
        //<------FIN ROTAR CON MOUSE------->
-       
-       
-        
+      
+    }
+   
+    public void Caminata()
+    {
+        contador++;
+        mover(panza.tgCapsula,0.0f,-0.02f,0.0f);
+        if(contador<5){
+            Caminar(tgMoverEsferaPDD, 13, "z");
+            Caminar(tgMoverEsferaPDI, -13, "z");
+            Caminar(tgMoverEsferaPTD,13, "z");
+            Caminar(tgMoverEsferaPTI, -13, "z");
+        } else {
+            if(contador<9){
+                Caminar(tgMoverEsferaPDD, -13, "z");
+                Caminar(tgMoverEsferaPDI, 13, "z");
+                Caminar(tgMoverEsferaPTD,-13, "z");
+                Caminar(tgMoverEsferaPTI, 13, "z");
+            } else {
+                if(contador<13){
+                    Caminar(tgMoverEsferaPDD, -13, "z");
+                    Caminar(tgMoverEsferaPDI, 13, "z");
+                    Caminar(tgMoverEsferaPTD,-13, "z");
+                    Caminar(tgMoverEsferaPTI, 13, "z");
+                } else {
+                    if(contador<17){
+                        Caminar(tgMoverEsferaPDD,13, "z");
+                        Caminar(tgMoverEsferaPDI, -13, "z");
+                        Caminar(tgMoverEsferaPTD,13, "z");
+                        Caminar(tgMoverEsferaPTI, -13, "z");
+                    } else {
+                        if(contador==17)
+                        {
+                            contador=0;
+                        }
+                    }
+                }
+            }
+        }
     }
     
+    public static void  Caminar(TransformGroup t, int g, String eje)
+    {
+        
+        Transform3D lectura=new Transform3D();
+        Transform3D escritura=new Transform3D();
+        
+        t.getTransform(lectura);
+        if (eje.equals("z")) {
+            escritura.rotZ(Math.PI / 180 * g);
+        }
+        if (eje.equals("y")) {
+            escritura.rotY(Math.PI / 180 * g);
+        }
+        if (eje.equals("x")) {
+            escritura.rotX(Math.PI / 180 * g);
+        }
+        lectura.mul(escritura);
+        t.setTransform(lectura);
+    }
+    
+     public void mover(TransformGroup t, float x, float y, float z) {
+        Transform3D lectura = new Transform3D();
+        Transform3D escritura = new Transform3D();
+        t.getTransform(lectura);
+        escritura.setTranslation(new Vector3f(x, y, z));
+        lectura.mul(escritura);
+        t.setTransform(lectura);
+    }
+     
+      public void girar(TransformGroup t, int g, String eje) {
+        Transform3D lectura=new Transform3D();
+        Transform3D escritura=new Transform3D();
+        
+        t.getTransform(lectura);
+        if (eje.equals("z")) {
+            escritura.rotZ(Math.PI / 180 * g);
+        }
+        if (eje.equals("y")) {
+            escritura.rotY(Math.PI / 180 * g);
+        }
+        if (eje.equals("x")) {
+            escritura.rotX(Math.PI / 180 * g);
+        }
+        lectura.mul(escritura);
+        t.setTransform(lectura);
+    }
 }
