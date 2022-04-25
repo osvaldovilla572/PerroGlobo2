@@ -28,6 +28,7 @@ public class PerroFrame extends javax.swing.JFrame {
     crearEscenaGraficaPerro creaEscena;
     int contador = 0;
     HiloCaminata hilo;
+    HiloSentar hiloSentar;
     public PerroFrame() {
         initComponents();
         GraphicsConfiguration config =SimpleUniverse.getPreferredConfiguration();
@@ -44,6 +45,7 @@ public class PerroFrame extends javax.swing.JFrame {
         n.getViewingPlatform().setNominalViewingTransform();
         n.addBranchGraph(Scene);
         hilo = new HiloCaminata(creaEscena);
+        hiloSentar = new HiloSentar(creaEscena);
         lienzo.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -80,36 +82,6 @@ public class PerroFrame extends javax.swing.JFrame {
             }
         });
     }
-    
-//    public static void  Caminar(TransformGroup t, int g, String eje)
-//    {
-//        
-//        Transform3D lectura=new Transform3D();
-//        Transform3D escritura=new Transform3D();
-//        
-//        t.getTransform(lectura);
-//        if (eje.equals("z")) {
-//            escritura.rotZ(Math.PI / 180 * g);
-//        }
-//        if (eje.equals("y")) {
-//            escritura.rotY(Math.PI / 180 * g);
-//        }
-//        if (eje.equals("x")) {
-//            escritura.rotX(Math.PI / 180 * g);
-//        }
-//        lectura.mul(escritura);
-//        t.setTransform(lectura);
-//    }
-//    
-//     public void mover(TransformGroup t, float x, float y, float z) {
-//        Transform3D lectura = new Transform3D();
-//        Transform3D escritura = new Transform3D();
-//        t.getTransform(lectura);
-//        escritura.setTranslation(new Vector3f(x, y, z));
-//        lectura.mul(escritura);
-//        t.setTransform(lectura);
-//    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,6 +93,7 @@ public class PerroFrame extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         btnCaminar = new javax.swing.JButton();
+        btnMoverCola = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -133,13 +106,22 @@ public class PerroFrame extends javax.swing.JFrame {
             }
         });
 
+        btnMoverCola.setText("Mover cola");
+        btnMoverCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoverColaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(619, Short.MAX_VALUE)
-                .addComponent(btnCaminar)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(605, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCaminar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMoverCola, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,7 +129,9 @@ public class PerroFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(btnCaminar)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnMoverCola)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,6 +148,19 @@ public class PerroFrame extends javax.swing.JFrame {
             hilo.c=true;
         }
     }//GEN-LAST:event_btnCaminarActionPerformed
+
+    private void btnMoverColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoverColaActionPerformed
+        //creaEscena.MoverCola();
+          if(hiloSentar.c == true)
+          {
+              hiloSentar.c=false;
+              hiloSentar=new HiloSentar(creaEscena);
+          } else {
+              hiloSentar.start();
+              hiloSentar.c=true;
+          }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMoverColaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,6 +199,7 @@ public class PerroFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCaminar;
+    private javax.swing.JButton btnMoverCola;
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
