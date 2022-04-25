@@ -78,6 +78,18 @@ public class PerroFrame extends javax.swing.JFrame {
                             hilo.c = true;
                         }
                         break;
+                        
+                    case '1':
+                        if(hiloSentar.c == true)
+                    {
+                        hiloSentar.c=false;
+                        hiloSentar=new HiloSentar(creaEscena);
+                    } else {
+                        hiloSentar.start();
+                        hiloSentar.c=true;
+                    }
+                        break;    
+                        
                 }
             }
         });
