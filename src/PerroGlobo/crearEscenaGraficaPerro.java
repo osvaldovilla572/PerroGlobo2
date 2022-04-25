@@ -42,7 +42,10 @@ class crearEscenaGraficaPerro {
     TransformGroup tgMoverEsferaPDI;
     TransformGroup tgMoverEsferaPTD;
     TransformGroup tgMoverEsferaPTI;
+    TransformGroup tgMoverCola;
+    TransformGroup tgMoverCabeza;
     int contador;
+    int contadorAux;
     
     public crearEscenaGraficaPerro(){
         int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
@@ -54,19 +57,41 @@ class crearEscenaGraficaPerro {
         //<------CABEZA----->
         Transform3D t3dGirarCabeza = new Transform3D();
         Transform3D t3dMoverCabeza = new Transform3D();
-        t3dMoverCabeza.setTranslation(new Vector3f(0.34f,-0.43f,0.0f));
-        t3dGirarCabeza.rotZ(Math.PI/180*-120);
+        t3dMoverCabeza.setTranslation(new Vector3f(0.0f,0.0f,0.0f));
+        t3dGirarCabeza.rotZ(Math.PI/180*-60);
         t3dMoverCabeza.mul(t3dGirarCabeza);
         cabeza.tgCapsula.setTransform(t3dMoverCabeza);
+        
+        Transform3D t3dEsferaCabeza = new Transform3D();
+        Transform3D t3dGirarEsferaCabeza = new Transform3D();
+        t3dMoverCabeza.setTranslation(new Vector3f(0.3f,-0.43f,0.0f));
+        t3dGirarEsferaCabeza.rotZ(Math.PI/180);
+        t3dEsferaCabeza.mul(t3dGirarEsferaCabeza);
+        tgMoverCabeza = new TransformGroup(t3dMoverCabeza);
+        Sphere esferaCabeza = new Sphere(0.085f,ap.color(255,0,0));
+        tgMoverCabeza.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        tgMoverCabeza.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+        tgMoverCabeza.addChild(esferaCabeza);
         //<----FIN CABEZA---->
         
         //<-----BASE COLA---->
         Transform3D t3dGirarColita1 = new Transform3D();
         Transform3D t3dMoverColita1 = new Transform3D();
-        t3dMoverColita1.setTranslation(new Vector3f(0.3f,0.43f,0.0f));
+        t3dMoverColita1.setTranslation(new Vector3f(0.06f,0.04f,0.0f));
         t3dGirarColita1.rotZ(Math.PI/180*-60);
         t3dMoverColita1.mul(t3dGirarColita1);
         cola1.tgCapsula.setTransform(t3dMoverColita1);
+        
+        Transform3D t3dMoverCola = new Transform3D();
+        Transform3D t3dGirarCola = new Transform3D();
+        t3dMoverCola.setTranslation(new Vector3f(0.24f,0.39f,0.0f));
+        t3dGirarCola.rotZ(Math.PI/180);
+        t3dMoverCola.mul(t3dGirarCola);
+        tgMoverCola = new TransformGroup(t3dMoverCola);
+        Sphere esferaCola = new Sphere(0.085f,ap.color(255,0,0));
+        tgMoverCola.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        tgMoverCola.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+        tgMoverCola.addChild(esferaCola);
         //<------FIN BASE COLA------->
         
         //<------FINAL COLA-------->
@@ -212,17 +237,20 @@ class crearEscenaGraficaPerro {
         objRaiz.addChild(myMouseRotate);
             
                 objRotate.addChild(panza.tgCapsula);
-                panza.tgCapsula.addChild(cabeza.tgCapsula);
-                panza.tgCapsula.addChild(cola1.tgCapsula);
-                cola1.tgCapsula.addChild(cola2.tgCapsula);
+                //panza.tgCapsula.addChild(cabeza.tgCapsula);
+                tgMoverCabeza.addChild(cabeza.tgCapsula);
                 tgMoverEsferaPDI.addChild(pataDelanteraIzq.tgCapsula);
                 tgMoverEsferaPDD.addChild(pataDelanteraDer.tgCapsula);
                 tgMoverEsferaPTD.addChild(pataTraseraDer.tgCapsula);
                 tgMoverEsferaPTI.addChild(pataTraseraIzq.tgCapsula);
+                tgMoverCola.addChild(cola1.tgCapsula);
+                cola1.tgCapsula.addChild(cola2.tgCapsula);
                 panza.tgCapsula.addChild(tgMoverEsferaPDD);
                 panza.tgCapsula.addChild(tgMoverEsferaPDI);
                 panza.tgCapsula.addChild(tgMoverEsferaPTD);
                 panza.tgCapsula.addChild(tgMoverEsferaPTI);
+                panza.tgCapsula.addChild(tgMoverCola);
+                panza.tgCapsula.addChild(tgMoverCabeza);
                 cabeza.tgCapsula.addChild(orejaIzq.tgCapsula);
                 cabeza.tgCapsula.addChild(orejaDer.tgCapsula);
                 cabeza.tgCapsula.addChild(boca.tgCapsula);
@@ -237,28 +265,28 @@ class crearEscenaGraficaPerro {
         contador++;
         mover(panza.tgCapsula,0.0f,-0.02f,0.0f);
         if(contador<5){
-            Caminar(tgMoverEsferaPDD, 13, "z");
-            Caminar(tgMoverEsferaPDI, -13, "z");
-            Caminar(tgMoverEsferaPTD,13, "z");
-            Caminar(tgMoverEsferaPTI, -13, "z");
+            Movimiento(tgMoverEsferaPDD, 13, "z");
+            Movimiento(tgMoverEsferaPDI, -13, "z");
+            Movimiento(tgMoverEsferaPTD,13, "z");
+            Movimiento(tgMoverEsferaPTI, -13, "z");
         } else {
             if(contador<9){
-                Caminar(tgMoverEsferaPDD, -13, "z");
-                Caminar(tgMoverEsferaPDI, 13, "z");
-                Caminar(tgMoverEsferaPTD,-13, "z");
-                Caminar(tgMoverEsferaPTI, 13, "z");
+                Movimiento(tgMoverEsferaPDD, -13, "z");
+                Movimiento(tgMoverEsferaPDI, 13, "z");
+                Movimiento(tgMoverEsferaPTD,-13, "z");
+                Movimiento(tgMoverEsferaPTI, 13, "z");
             } else {
                 if(contador<13){
-                    Caminar(tgMoverEsferaPDD, -13, "z");
-                    Caminar(tgMoverEsferaPDI, 13, "z");
-                    Caminar(tgMoverEsferaPTD,-13, "z");
-                    Caminar(tgMoverEsferaPTI, 13, "z");
+                    Movimiento(tgMoverEsferaPDD, -13, "z");
+                    Movimiento(tgMoverEsferaPDI, 13, "z");
+                    Movimiento(tgMoverEsferaPTD,-13, "z");
+                    Movimiento(tgMoverEsferaPTI, 13, "z");
                 } else {
                     if(contador<17){
-                        Caminar(tgMoverEsferaPDD,13, "z");
-                        Caminar(tgMoverEsferaPDI, -13, "z");
-                        Caminar(tgMoverEsferaPTD,13, "z");
-                        Caminar(tgMoverEsferaPTI, -13, "z");
+                        Movimiento(tgMoverEsferaPDD,13, "z");
+                        Movimiento(tgMoverEsferaPDI, -13, "z");
+                        Movimiento(tgMoverEsferaPTD,13, "z");
+                        Movimiento(tgMoverEsferaPTI, -13, "z");
                     } else {
                         if(contador==17)
                         {
@@ -270,7 +298,54 @@ class crearEscenaGraficaPerro {
         }
     }
     
-    public static void  Caminar(TransformGroup t, int g, String eje)
+    public void MoverCola()
+    {
+        contador++;
+        if(contador<5)
+        {
+           contadorAux++;
+          Movimiento(tgMoverCola,11,"x");
+          if(contadorAux<5){
+              Movimiento(tgMoverCabeza, 8, "x");
+              mover(tgMoverCabeza, -0.01f, 0.01f, 0.0f);
+              Movimiento(tgMoverCabeza, -7, "z");
+              Movimiento(panza.tgCapsula, 10, "z");
+              Movimiento(tgMoverEsferaPDD,-5,"z");
+              Movimiento(tgMoverEsferaPDI,-5,"z");
+              Movimiento(tgMoverEsferaPTD,12,"z");
+              Movimiento(tgMoverEsferaPTI, 12, "z");
+            }
+        } else {
+            if(contador<9)
+            {
+                Movimiento(tgMoverCola,-11,"x");
+            } else {
+                if(contador<13)
+                {
+                    Movimiento(tgMoverCola,-11,"x");
+                } else {
+                    if(contador<17)
+                    {
+                        Movimiento(tgMoverCola,11,"x");
+                    } else {
+                        if(contador==17)
+                            contador=0;
+                    }
+                }
+            }
+        }
+    }
+    
+//    public void InclinarCabeza()
+//    {
+//        contador++;
+//        if(contador<=5)
+//        {
+//            Movimiento(tgMoverCabeza, 4, "x");
+//        }
+//    }
+    
+    public static void  Movimiento(TransformGroup t, int g, String eje)
     {
         
         Transform3D lectura=new Transform3D();
