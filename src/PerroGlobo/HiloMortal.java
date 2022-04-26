@@ -10,6 +10,25 @@ package PerroGlobo;
  * @author osval
  */
 public class HiloMortal extends Thread{
+    crearEscenaGraficaPerro crearEscena = new crearEscenaGraficaPerro();
+    boolean c = false;
     
+    public HiloMortal(crearEscenaGraficaPerro cE){
+        crearEscena = cE;
+    }
+    
+    @Override
+    public void run(){
+        while(true)
+        {
+            crearEscena.Mortal();
+            if(c==false) break;
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException ex) {
+                
+            }
+        }//while
+    }//run
     
 }

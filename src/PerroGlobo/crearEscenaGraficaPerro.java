@@ -336,14 +336,16 @@ class crearEscenaGraficaPerro {
         }
     }
     
-//    public void InclinarCabeza()
-//    {
-//        contador++;
-//        if(contador<=5)
-//        {
-//            Movimiento(tgMoverCabeza, 4, "x");
-//        }
-//    }
+public void Mortal()
+{
+    TransformGroup tgAux = new TransformGroup();
+    contador++;
+    while(contador<5)
+    {
+        Movimiento(panza.tgCapsula,10,"z");
+        //mover(panza.tgCapsula, 0.1f, 0.01f, 0.0f);
+    }
+}
     
     public static void  Movimiento(TransformGroup t, int g, String eje)
     {

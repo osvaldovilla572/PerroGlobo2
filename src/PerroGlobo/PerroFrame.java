@@ -29,6 +29,7 @@ public class PerroFrame extends javax.swing.JFrame {
     int contador = 0;
     HiloCaminata hilo;
     HiloSentar hiloSentar;
+    HiloMortal hiloMortal;
     public PerroFrame() {
         initComponents();
         GraphicsConfiguration config =SimpleUniverse.getPreferredConfiguration();
@@ -88,8 +89,17 @@ public class PerroFrame extends javax.swing.JFrame {
                         hiloSentar.start();
                         hiloSentar.c=true;
                     }
-                        break;    
+                        break;   
                         
+                    case '2':
+                       if(hiloMortal.c == true){
+                           hiloMortal.c=false;
+                           hiloMortal=new HiloMortal(creaEscena);
+                       } else {
+                           hiloMortal.start();
+                           hiloMortal.c=true;
+                       }
+                       break;
                 }
             }
         });

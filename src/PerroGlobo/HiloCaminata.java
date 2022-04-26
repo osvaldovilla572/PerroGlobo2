@@ -5,10 +5,6 @@
  */
 package PerroGlobo;
 
-/**
- *
- * @author osval
- */
 public class HiloCaminata extends Thread{
     crearEscenaGraficaPerro crearEscena = new crearEscenaGraficaPerro();
     boolean c = false;
