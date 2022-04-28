@@ -47,6 +47,7 @@ public class PerroFrame extends javax.swing.JFrame {
         n.addBranchGraph(Scene);
         hilo = new HiloCaminata(creaEscena);
         hiloSentar = new HiloSentar(creaEscena);
+        hiloMortal = new HiloMortal(creaEscena);
         lienzo.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {

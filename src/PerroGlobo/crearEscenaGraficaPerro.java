@@ -10,12 +10,15 @@ import com.sun.j3d.utils.geometry.Cone;
 import com.sun.j3d.utils.geometry.Cylinder;
 import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
+import java.awt.Color;
+import java.awt.color.ColorSpace;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3f;
+import javax.vecmath.Color3f;
 
 /**
  *
@@ -51,8 +54,12 @@ class crearEscenaGraficaPerro {
         int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
         Textura textura = new Textura();
         
+        
         panza.tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         panza.tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+        
+        
+        
         
         //<------CABEZA----->
         Transform3D t3dGirarCabeza = new Transform3D();
@@ -237,6 +244,10 @@ class crearEscenaGraficaPerro {
         objRaiz.addChild(myMouseRotate);
             
                 objRotate.addChild(panza.tgCapsula);
+                objRotate.addChild(ap.luzDireccional(0f, 0f, 0f, new Vector3f(0.0f,0.0f,0.0f)));
+                
+                panza.t3dCapsula.setScale(.2);
+                //panza.tgCapsula.addChild();
                 //panza.tgCapsula.addChild(cabeza.tgCapsula);
                 tgMoverCabeza.addChild(cabeza.tgCapsula);
                 tgMoverEsferaPDI.addChild(pataDelanteraIzq.tgCapsula);
@@ -338,13 +349,27 @@ class crearEscenaGraficaPerro {
     
 public void Mortal()
 {
-    TransformGroup tgAux = new TransformGroup();
-    contador++;
-    while(contador<5)
-    {
-        Movimiento(panza.tgCapsula,10,"z");
-        //mover(panza.tgCapsula, 0.1f, 0.01f, 0.0f);
-    }
+   contador++;
+   if(contador<37)
+   {
+       contadorAux++;
+       Movimiento(panza.tgCapsula,10, "z");
+       mover(panza.tgCapsula, 0.01f, 0.01f, 0.0f);
+       if(contadorAux<5)
+       {
+           Movimiento(tgMoverEsferaPDD, 20, "z");
+            Movimiento(tgMoverEsferaPDI, 20, "z");
+            Movimiento(tgMoverEsferaPTD,-20, "z");
+            Movimiento(tgMoverEsferaPTI, -20, "z");
+       } 
+       else if(contador>=33 && contador<37)
+       {
+               Movimiento(tgMoverEsferaPDD, -20, "z");
+                Movimiento(tgMoverEsferaPDI, -20, "z");
+                Movimiento(tgMoverEsferaPTD,20, "z");
+                Movimiento(tgMoverEsferaPTI, 20, "z");
+        }
+   }
 }
     
     public static void  Movimiento(TransformGroup t, int g, String eje)

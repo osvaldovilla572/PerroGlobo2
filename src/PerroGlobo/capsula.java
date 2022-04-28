@@ -20,6 +20,7 @@ import javax.vecmath.Vector3f;
 public class capsula {
     
     TransformGroup tgCapsula;
+    Transform3D t3dCapsula;
     
     int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
     Textura textura = new Textura();
@@ -27,7 +28,7 @@ public class capsula {
     public capsula(float t, float a){
         Appearance apBlanca = new Appearance();
         
-        Transform3D t3dCapsula = new Transform3D();
+        t3dCapsula = new Transform3D();
         t3dCapsula.rotZ(Math.PI/180*90);
         tgCapsula = new TransformGroup(t3dCapsula);
         tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
