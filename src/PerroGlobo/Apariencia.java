@@ -5,12 +5,14 @@
  */
 package PerroGlobo;
 
-import javafx.scene.AmbientLight;
 import javafx.scene.paint.Color;
+import javax.media.j3d.AmbientLight;
 import javax.media.j3d.Appearance;
+import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.ColoringAttributes;
 import javax.media.j3d.DirectionalLight;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
 
 /**
@@ -32,17 +34,17 @@ public class Apariencia {
         return ap;
     }
     
-    public DirectionalLight luzDireccional(float r, float g, float b, Vector3f vector)
+    public DirectionalLight luzDireccional(Color3f c, Vector3f vector)
     {
-        objColor = new Color3f(r/255f,g/255f,b/255f);
-        DirectionalLight ld = new DirectionalLight(objColor,vector);
+        DirectionalLight ld = new DirectionalLight(c,vector);
         return ld;
     }
     
     public AmbientLight luzAmbiental(Color3f c)
     {
-        AmbientLight la = new AmbientLight(Color.CORAL);
-        return la;
+        AmbientLight lightA = new AmbientLight(c);
+        lightA.setInfluencingBounds(new BoundingSphere(new Point3d(0,0,0),100));  
+        return lightA;
     }
     
 }

@@ -6,13 +6,18 @@
 package PerroGlobo;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
+import java.awt.Color;
 import java.awt.GraphicsConfiguration;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.media.j3d.AmbientLight;
+import javax.media.j3d.Appearance;
+import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
+import javax.vecmath.Color3f;
 import javax.vecmath.Vector3f;
 
 /**
@@ -30,6 +35,10 @@ public class PerroFrame extends javax.swing.JFrame {
     HiloCaminata hilo;
     HiloSentar hiloSentar;
     HiloMortal hiloMortal;
+    Apariencia ap;
+    Color3f colorLA;
+    Color3f colorLD;
+    Vector3f vector;
     public PerroFrame() {
         initComponents();
         GraphicsConfiguration config =SimpleUniverse.getPreferredConfiguration();

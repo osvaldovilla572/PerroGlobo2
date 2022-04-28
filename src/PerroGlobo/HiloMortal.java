@@ -10,7 +10,8 @@ package PerroGlobo;
  * @author osval
  */
 public class HiloMortal extends Thread{
-    crearEscenaGraficaPerro crearEscena = new crearEscenaGraficaPerro();
+    
+     crearEscenaGraficaPerro crearEscena = new crearEscenaGraficaPerro();
     boolean c = false;
     
     public HiloMortal(crearEscenaGraficaPerro cE){
@@ -24,7 +25,7 @@ public class HiloMortal extends Thread{
             crearEscena.Mortal();
             if(c==false) break;
             try {
-                Thread.sleep(20);
+                Thread.sleep(25);
             } catch (InterruptedException ex) {
                 
             }

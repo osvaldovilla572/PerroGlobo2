@@ -47,6 +47,7 @@ class crearEscenaGraficaPerro {
     TransformGroup tgMoverEsferaPTI;
     TransformGroup tgMoverCola;
     TransformGroup tgMoverCabeza;
+    Transform3D escalarPerro;
     int contador;
     int contadorAux;
     
@@ -54,7 +55,12 @@ class crearEscenaGraficaPerro {
         int paraTextura = Primitive.GENERATE_NORMALS + Primitive.GENERATE_TEXTURE_COORDS;
         Textura textura = new Textura();
         
-        
+        escalarPerro = new Transform3D();
+        Transform3D posicionInicial = new Transform3D();
+        escalarPerro.setScale(.5);
+        posicionInicial.rotZ(Math.PI/180*90);
+        escalarPerro.mul(posicionInicial);
+        panza.tgCapsula.setTransform(escalarPerro);
         panza.tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
         panza.tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         
@@ -242,13 +248,14 @@ class crearEscenaGraficaPerro {
         myMouseRotate.setTransformGroup(objRotate);
         myMouseRotate.setSchedulingBounds(new BoundingSphere());
         objRaiz.addChild(myMouseRotate);
-            
-                objRotate.addChild(panza.tgCapsula);
-                objRotate.addChild(ap.luzDireccional(0f, 0f, 0f, new Vector3f(0.0f,0.0f,0.0f)));
+        Color3f colorLA = new Color3f(Color.BLACK);
+        Color3f colorLD = new Color3f(Color.RED);
+        Vector3f vector = new Vector3f(-1.0f,-1.0f,-1.0f);
                 
+                objRaiz.addChild(ap.luzAmbiental(colorLA));
+                objRaiz.addChild(ap.luzDireccional(colorLD, vector));
+                objRotate.addChild(panza.tgCapsula);
                 panza.t3dCapsula.setScale(.2);
-                //panza.tgCapsula.addChild();
-                //panza.tgCapsula.addChild(cabeza.tgCapsula);
                 tgMoverCabeza.addChild(cabeza.tgCapsula);
                 tgMoverEsferaPDI.addChild(pataDelanteraIzq.tgCapsula);
                 tgMoverEsferaPDD.addChild(pataDelanteraDer.tgCapsula);
@@ -354,7 +361,7 @@ public void Mortal()
    {
        contadorAux++;
        Movimiento(panza.tgCapsula,10, "z");
-       mover(panza.tgCapsula, 0.01f, 0.01f, 0.0f);
+       mover(panza.tgCapsula, 0.05f, 0.05f, 0.0f);
        if(contadorAux<5)
        {
            Movimiento(tgMoverEsferaPDD, 20, "z");

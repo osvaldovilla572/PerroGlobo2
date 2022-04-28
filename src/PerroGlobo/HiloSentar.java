@@ -22,7 +22,6 @@ public class HiloSentar extends Thread{
         while(true)
         {
             crearEscena.MoverCola();
-//            crearEscena.InclinarCabeza();
             if(c==false) break;
             try {
                 Thread.sleep(25);
