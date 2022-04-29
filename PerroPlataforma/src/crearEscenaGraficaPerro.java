@@ -28,7 +28,7 @@ class crearEscenaGraficaPerro {
     
     BranchGroup objRaiz = new BranchGroup();
     
-    Apariencia ap = new Apariencia();
+    Apariencia1 ap = new Apariencia1();
     
     capsula panza = new capsula(1,1);
     capsula cabeza = new capsula(0.5f,0.27f);
@@ -57,7 +57,7 @@ class crearEscenaGraficaPerro {
         
         escalarPerro = new Transform3D();
         Transform3D posicionInicial = new Transform3D();
-        escalarPerro.setScale(.5);
+//        escalarPerro.setScale(.5);
         posicionInicial.rotZ(Math.PI/180*90);
         escalarPerro.mul(posicionInicial);
         panza.tgCapsula.setTransform(escalarPerro);
@@ -239,22 +239,22 @@ class crearEscenaGraficaPerro {
        //<-----------FIN NARIZ---------->
        
        //<---------ROTAR CON MOUSE--------->
-       TransformGroup objRotate = new TransformGroup();
-        objRotate.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-        objRotate.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-        objRaiz.addChild(objRotate);
-        
-        MouseRotate myMouseRotate = new MouseRotate();
-        myMouseRotate.setTransformGroup(objRotate);
-        myMouseRotate.setSchedulingBounds(new BoundingSphere());
-        objRaiz.addChild(myMouseRotate);
-        Color3f colorLA = new Color3f(Color.BLACK);
-        Color3f colorLD = new Color3f(Color.RED);
-        Vector3f vector = new Vector3f(-1.0f,-1.0f,-1.0f);
+//       TransformGroup objRotate = new TransformGroup();
+//        objRotate.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
+//        objRotate.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
+//        objRaiz.addChild(objRotate);
+//        
+//        MouseRotate myMouseRotate = new MouseRotate();
+//        myMouseRotate.setTransformGroup(objRotate);
+//        myMouseRotate.setSchedulingBounds(new BoundingSphere());
+//        objRaiz.addChild(myMouseRotate);
+//        Color3f colorLA = new Color3f(Color.BLACK);
+//        Color3f colorLD = new Color3f(Color.RED);
+//        Vector3f vector = new Vector3f(-1.0f,-1.0f,-1.0f);
                 
 //                objRaiz.addChild(ap.luzAmbiente());
-                objRotate.addChild(panza.tgCapsula);
-                panza.t3dCapsula.setScale(.2);
+//                objRotate.addChild(panza.tgCapsula);
+                //panza.t3dCapsula.setScale(.2);
                 tgMoverCabeza.addChild(cabeza.tgCapsula);
                 tgMoverEsferaPDI.addChild(pataDelanteraIzq.tgCapsula);
                 tgMoverEsferaPDD.addChild(pataDelanteraDer.tgCapsula);

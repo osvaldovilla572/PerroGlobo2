@@ -20,7 +20,7 @@ import javax.vecmath.Vector3f;
  *
  * @author DE LA CRUZ VILLANUEV
  */
-public class Apariencia_1 {
+public class Apariencia1 {
     Color3f objColor;
     
     public Appearance color(float r, float g, float b)

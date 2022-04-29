@@ -6,10 +6,10 @@
 
 
 public class HiloCaminata extends Thread{
-    crearEscenaGraficaPerro crearEscena = new crearEscenaGraficaPerro();
+    crearEscenaGraficaA crearEscena = new crearEscenaGraficaA();
     boolean c = false;
     
-    public HiloCaminata(crearEscenaGraficaPerro cE){
+    public HiloCaminata(crearEscenaGraficaA cE){
         crearEscena = cE;
     }
     
@@ -17,7 +17,7 @@ public class HiloCaminata extends Thread{
     public void run(){
         while(true)
         {
-            crearEscena.Caminata();
+            crearEscena.p1.Caminata();
             if(c==false) break;
             try {
                 Thread.sleep(18);

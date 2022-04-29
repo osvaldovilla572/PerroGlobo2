@@ -116,12 +116,12 @@ public class crearEscenaGraficaA {
         //objRaiz.addChild(e1.tgElefante);
         objRaiz.addChild(tgCielo);
         //objRaiz.addChild(tgPlataforma);
-        MovGirar mgElefante=new MovGirar(0.0f, 0.55f, 0.0f, 0,'x');
-        e1.t3dElefanteGirar.setScale(.2);
+        MovGirar mgPerro=new MovGirar(0.8f, 0.0f, 0.0f, 0,'x');
+        p1.escalarPerro.setScale(.15);
         
-        e1.t3dElefanteGirar.mul(mgElefante.t3dMover);
-        e1.tgElefante.setTransform(e1.t3dElefanteGirar);
-        tgPlataforma.addChild(e1.tgElefante);
+        p1.escalarPerro.mul(mgPerro.t3dMover);
+        p1.panza.tgCapsula.setTransform(p1.escalarPerro);
+        tgPlataforma.addChild(p1.panza.tgCapsula);
         
         
         ///////Rotar con Mouse
