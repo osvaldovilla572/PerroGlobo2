@@ -113,9 +113,7 @@ public class crearEscenaGraficaA {
         tgmanzana.addChild(manzana);
         tgPlataforma.addChild(tgmanzana);
         
-        //objRaiz.addChild(e1.tgElefante);
         objRaiz.addChild(tgCielo);
-        //objRaiz.addChild(tgPlataforma);
         MovGirar mgPerro=new MovGirar(0.8f, 0.0f, 0.0f, 0,'x');
         p1.escalarPerro.setScale(.15);
         
