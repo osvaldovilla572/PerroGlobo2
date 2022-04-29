@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PerroGlobo;
+
 
 import javafx.scene.paint.Color;
 import javax.media.j3d.AmbientLight;
@@ -20,7 +20,7 @@ import javax.vecmath.Vector3f;
  *
  * @author DE LA CRUZ VILLANUEV
  */
-public class Apariencia {
+public class Apariencia_1 {
     Color3f objColor;
     
     public Appearance color(float r, float g, float b)
