@@ -12,13 +12,17 @@ import com.sun.j3d.utils.geometry.Primitive;
 import com.sun.j3d.utils.geometry.Sphere;
 import java.awt.Color;
 import java.awt.color.ColorSpace;
+import javax.media.j3d.AmbientLight;
 import javax.media.j3d.Appearance;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.DirectionalLight;
+import javax.media.j3d.Material;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3f;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3d;
 
 /**
  *
@@ -274,6 +278,26 @@ class crearEscenaGraficaPerro {
                 boca.tgCapsula.addChild(tgNariz);
                 
        //<------FIN ROTAR CON MOUSE------->
+       Appearance apariencia = new Appearance();
+       Material material = new Material();
+        material.setAmbientColor(new Color3f(java.awt.Color.GREEN ));
+        material.setDiffuseColor(new Color3f(java.awt.Color.BLACK));
+        material.setSpecularColor(new Color3f(java.awt.Color.WHITE));
+        material.setEmissiveColor(new Color3f(java.awt.Color.BLACK));
+        material.setShininess(20.0f);
+        apariencia.setMaterial(material);
+        
+        //Cylinder cilindro = new Cylinder(0.3f, 0.7f,apariencia);
+        
+        AmbientLight luzAmbiente = new AmbientLight(new Color3f(Color.DARK_GRAY));
+        luzAmbiente.setInfluencingBounds(new BoundingSphere(new Point3d(0,0,0),100));
+        
+        DirectionalLight luzD = new DirectionalLight(new Color3f(Color.WHITE), new Vector3f(-1.0f,-1.0f,-1.0f));
+         luzD.setInfluencingBounds(new BoundingSphere(new Point3d(0,0,0),100));
+
+        //objRaiz.addChild(cilindro);
+        objRaiz.addChild(luzAmbiente);
+        objRaiz.addChild(luzD);
       
     }
    

@@ -33,7 +33,7 @@ public class capsula {
         tgCapsula = new TransformGroup(t3dCapsula);
         tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
         tgCapsula.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
-        Cylinder panza = new Cylinder(0.2f*t,0.6f*a,paraTextura,textura.crearTexturas("pieldalmata.jpg"));
+        Cylinder panza = new Cylinder(0.2f*t,0.6f*a,paraTextura,textura.crearTexturas("Pelo.jpg"));
         //objRaiz.addChild(tgCapsula);
         tgCapsula.addChild(panza);
         
@@ -42,7 +42,7 @@ public class capsula {
         t3dEsferaCapsula1.setTranslation(new Vector3f(0.0f,0.3f*a,0.0f));
         
         TransformGroup tgEsferaCapsula1 = new TransformGroup(t3dEsferaCapsula1);
-        Sphere esferaCapsula1 = new Sphere(0.2f*t,paraTextura,textura.crearTexturas("pieldalmata.jpg"));
+        Sphere esferaCapsula1 = new Sphere(0.2f*t,paraTextura,textura.crearTexturas("Pelo.jpg"));
         tgCapsula.addChild(tgEsferaCapsula1);
         tgEsferaCapsula1.addChild(esferaCapsula1);
         
@@ -51,7 +51,7 @@ public class capsula {
         t3dEsferaCapsula2.setTranslation(new Vector3f(0.0f,-0.3f*a,0.0f));
         
         TransformGroup tgEsferaCapsula2 = new TransformGroup(t3dEsferaCapsula2);
-        Sphere esferaCapsula2 = new Sphere(0.2f*t,paraTextura,textura.crearTexturas("pieldalmata.jpg"));
+        Sphere esferaCapsula2 = new Sphere(0.2f*t,paraTextura,textura.crearTexturas("Pelo.jpg"));
         tgCapsula.addChild(tgEsferaCapsula2);
         tgEsferaCapsula2.addChild(esferaCapsula2);
     }
